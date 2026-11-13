@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LocalCue</title>
+</head>
+<body>
+  <div id="controls">
+    <button id="open-btn" title="Open a script file (Ctrl/Cmd+O)">&#x1F4C2; Open</button>
+    <button id="save-btn" title="Save the script (Ctrl/Cmd+S; Shift to choose a new file)">&#x1F4BE; Save</button>
+    <button id="reload-btn" title="Reload the script from disk (discards unsaved edits)" hidden>&#x27F3; Reload</button>
+    <span id="file-status"></span>
+
+    <div class="ctrl-sep"></div>
+    <span class="section-label">Mobile text controls:</span>
+
+    <div class="slider-group">
+      <label for="font-slider">Font size</label>
+      <div class="slider-row">
+        <input type="range" id="font-slider" min="16" max="96" step="4" value="36">
+        <span class="slider-val" id="font-display">36px</span>
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <label for="margin-slider">| side margins |</label>
+      <div class="slider-row">
+        <input type="range" id="margin-slider" min="0" max="40" step="1" value="15">
+        <span class="slider-val" id="margin-display">15%</span>
+      </div>
+    </div>
+
+    <button id="flip-btn" class="active" title="Toggle left-right mirror on the phone">&#8596; Flip</button>
+
+    <button id="rotate-btn" title="Rotate the phone display by 90°">&#x27F3; Rotate 0°</button>
+
+    <div class="slider-group">
+      <label for="bright-slider">&#9728;&#xFE0E; Brightness</label>
+      <div class="slider-row">
+        <input type="range" id="bright-slider" min="0" max="100" step="1" value="25">
+        <span class="slider-val" id="bright-display">25%</span>
+      </div>
+    </div>
+
+    <div class="ctrl-sep"></div>
+
+    <div id="mode-switch" role="group" aria-label="Mode">
+      <button id="mode-edit" class="active" title="Edit the script (Esc)">&#9998; Edit</button>
+      <button id="mode-play" title="Play: present the script (paused; Space starts the scrolling)">&#9654; Play</button>
+    </div>
+
+    <div class="slider-group">
+      <label for="speed-slider">&#8644; Speed (&#8592;&#8594;)</label>
+      <div class="slider-row">
+        <input type="range" id="speed-slider" min="1" max="100" step="1" value="30">
+        <span class="slider-val" id="speed-display">30</span>
+      </div>
+    </div>
+
+    <span id="play-status"></span>
+
+    <div class="ctrl-sep"></div>
+
+    <button id="qr-btn" title="Show the QR code for phones">&#x1F4F1; QR Code</button>
+    <span id="devices" title="Phones connected to this prompter">no phones</span>
+
+    <span id="spacer"></span>
+    <span id="scroll-display">position: 0%</span>
+    <span id="conn" class="connecting" title="Connection to the built-in server">connecting&hellip;</span>
+  </div>
+
+  <div id="banner" hidden>
+    <span id="banner-text"></span>
+    <button id="banner-retry">Try again</button>
+  </div>
+
+  <div id="mode-bar" class="edit">
+    <strong id="mode-title"></strong>
+    <span id="mode-hint"></span>
+  </div>
+
+  <div id="editor">
+    <textarea id="script" spellcheck="false" placeholder="Paste or type your script here…"></textarea>
+    <div id="reading-line"></div>
+  </div>
+  <div id="mirror" aria-hidden="true"></div>
+
+  <div id="qr-overlay" class="overlay" hidden>
+    <div id="qr-popup" class="popup" role="dialog" aria-label="Connect a phone">
+      <h2>Connect a phone</h2>
+      <p class="muted">Phone and computer must be on the same Wi-Fi network.</p>
+      <img id="qr-img" alt="QR code" hidden>
+      <p id="qr-url" title="Click to copy"></p>
+      <p id="qr-note" class="note" hidden></p>
+      <label id="iface-row" class="iface-row">Network
+        <select id="iface-select"></select>
+      </label>
+      <div class="popup-buttons">
+        <button id="qr-copy">Copy link</button>
+        <button id="qr-rotate" title="Disconnect all phones and invalidate old QR codes">New access key</button>
+        <button id="qr-close" class="primary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirm-overlay" class="overlay" hidden>
+    <div class="popup" role="alertdialog" aria-labelledby="confirm-text">
+      <p id="confirm-text"></p>
+      <div class="popup-buttons">
+        <button id="confirm-cancel">Cancel</button>
+        <button id="confirm-ok" class="primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" hidden></div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="theme-color" content="#000000">
+  <meta name="referrer" content="no-referrer">
+  <meta name="localcue-build" content="__BUILD__">
+  <title>LocalCue</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #hint {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      color: rgba(255,255,255,0.4);
+      font: 13px sans-serif;
+      pointer-events: none;
+      transition: opacity 1s ease;
+    }
+
+    #indicators {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 6px;
+      pointer-events: none;
+    }
+    #indicators i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #444;   /* grey = unknown */
+      transition: background 0.4s;
+    }
+    #wake-indicator.active   { background: #48f; }  /* blue = wake lock held */
+    #wake-indicator.inactive { background: #f44; }  /* red  = API failed / released */
+    #conn-indicator.open       { background: #3c6; }  /* green = connected to the desktop */
+    #conn-indicator.connecting { background: #fa4; }  /* amber = (re)connecting */
+    #conn-indicator.closed     { background: #f44; }
+
+    #display {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      transform: scaleX(-1); /* mirror by default; JS moves the text with transform */
+      will-change: transform;
+
+      padding: 20px 15%;
+      font-size: 36px;
+      font-family: Georgia, serif;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* The stage holds text + reading line and is rotated as a whole (see layoutStage). */
+    #stage {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+      overflow: hidden;
+    }
+
+    /* Reading line: positioned by JS, one third of the way down the stage */
+    #reading-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(255, 70, 70, 0.45);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="display"></div>
+    <div id="reading-line"></div>
+  </div>
+  <div id="hint">tap for fullscreen</div>
+  <div id="indicators">
+    <i id="conn-indicator" title="Connection to the desktop"></i>
+    <i id="wake-indicator" title="Wake lock status"></i>
+  </div>
+  <script type="module" src="/assets/mobile.js"></script>
+</body>
+</html>

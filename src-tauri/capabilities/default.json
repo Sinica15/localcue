@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Permissions for the local desktop window only. No remote URL is granted any capability, so phones that open the teleprompter page get no access to Tauri APIs.",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}
