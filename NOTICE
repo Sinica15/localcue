@@ -1,0 +1,8 @@
+LocalCue desktop
+Copyright the LocalCue desktop contributors.
+
+This project is a Tauri/Rust port of LocalCue (https://github.com/mdda/localcue),
+licensed under the Apache License 2.0. The teleprompter UI, the character-offset
+positioning (shared/textpos.js) and the control scheme originate from that project;
+legacy/voice.py is kept unchanged as a reference for a future voice-follow port,
+which in turn adapts ideas from promptme-ai (https://github.com/larsbaunwall/promptme-ai).
